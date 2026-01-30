@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrix Screensaver</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body { background: #000; font-family: "Consolas", "Monaco", "Courier New", monospace; }
+    #canvas { display: block; width: 100%; height: 100%; }
+    #evangelion {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(24px, 6vw, 72px);
+      font-weight: bold;
+      color: #ffff00;
+      text-shadow: 0 0 20px rgba(255,255,0,0.8), 0 0 40px rgba(255,255,0,0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.2s ease;
+      white-space: nowrap;
+      letter-spacing: 0.1em;
+    }
+    #evangelion.visible { opacity: 1; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <div id="evangelion" aria-hidden="true">에반게리온</div>
+  <script>
+    (function() {
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+      const evangelionEl = document.getElementById('evangelion');
+
+      const chars = 'ｦｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const fontSize = 14;
+      const speed = 0.6;
+      let columns = 0;
+      let drops = [];
+      let w, h;
+      let evangelionVisible = false;
+      let evangelionTimeout = null;
+      let evangelionMinMs = 15000;
+      let evangelionMaxMs = 45000;
+
+      try {
+        const params = new URLSearchParams(location.search || '');
+        const v = parseInt(params.get('evMin'), 10); if (!isNaN(v)) evangelionMinMs = v;
+        const v2 = parseInt(params.get('evMax'), 10); if (!isNaN(v2)) evangelionMaxMs = v2;
+      } catch (_) {}
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        columns = Math.floor(w / fontSize);
+        drops = [];
+        for (let i = 0; i < columns; i++) {
+          drops[i] = Math.random() * -80;
+        }
+      }
+
+      function drawMatrix() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+        ctx.fillRect(0, 0, w, h);
+        ctx.font = fontSize + 'px monospace';
+        for (let i = 0; i < drops.length; i++) {
+          const char = chars[Math.floor(Math.random() * chars.length)];
+          const x = i * fontSize;
+          const y = drops[i] * fontSize;
+          ctx.fillStyle = '#00ff00';
+          ctx.fillText(char, x, y);
+          if (y > h && Math.random() > 0.98) {
+            drops[i] = -Math.random() * 20;
+          }
+          drops[i] += speed;
+        }
+      }
+
+      function showEvangelion() {
+        if (evangelionVisible) return;
+        evangelionVisible = true;
+        evangelionEl.classList.add('visible');
+        evangelionTimeout = setTimeout(() => {
+          evangelionEl.classList.remove('visible');
+          evangelionVisible = false;
+          scheduleEvangelion();
+        }, 2500);
+      }
+
+      function scheduleEvangelion() {
+        const delay = evangelionMinMs + Math.random() * (evangelionMaxMs - evangelionMinMs);
+        setTimeout(showEvangelion, Math.max(3000, delay));
+      }
+
+      function loop() {
+        drawMatrix();
+        requestAnimationFrame(loop);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+      scheduleEvangelion();
+      loop();
+    })();
+  </script>
+</body>
+</html>

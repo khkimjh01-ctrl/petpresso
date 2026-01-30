@@ -1,0 +1,45 @@
+========================================
+장기 게임 - 라이브러리 설치 방법
+========================================
+
+■ 1단계: pip 업그레이드 (권장)
+   명령 프롬프트(CMD) 또는 PowerShell에서:
+   
+   python -m pip install --upgrade pip
+
+■ 2단계: pygame 설치
+   
+   방법 A (일반적으로 이걸로 시도):
+   python -m pip install pygame
+
+   방법 B (방법 A에서 에러 날 때):
+   py -m pip install pygame
+
+   방법 C (권한 오류 시):
+   python -m pip install pygame --user
+
+■ 자주 나오는 에러와 해결
+
+1) "pip을(를) 찾을 수 없습니다" / "pip is not recognized"
+   → python -m pip install pygame  처럼 "python -m pip" 로 실행하세요.
+
+2) "Microsoft Visual C++ 14.0 or greater is required"
+   → Python이 너무 새 버전(3.12 이상)이면 이 에러가 날 수 있습니다.
+   → 해결 1: Python 3.10 또는 3.11 사용 후 다시 설치 시도
+   → 해결 2: pygame 대신 pygame-ce 사용 시도:
+        python -m pip install pygame-ce
+     (설치 후 main.py 1줄만 수정: import pygame → import pygame_ce as pygame)
+
+3) "No matching distribution found"
+   → 인터넷 연결 확인 후, pip 업그레이드 후 다시 시도:
+        python -m pip install --upgrade pip
+        python -m pip install pygame
+
+4) 한글 경로(예: 문서, 바탕화면) 때문에 오류
+   → 프로젝트 폴더를 C:\janggi 처럼 영문 경로로 복사한 뒤,
+     그 폴더에서 pip install 과 python main.py 를 실행해 보세요.
+
+■ 실행
+   설치가 끝난 뒤, janggi 폴더에서:
+   
+   python main.py

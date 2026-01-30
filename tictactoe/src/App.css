@@ -1,0 +1,252 @@
+/* PRD 4.1~4.4 화면 구성·시각·인터랙션·반응형 */
+
+.app-wrap {
+  width: 100%;
+  max-width: 720px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 탭: PRD / 게임 전환 */
+.tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+  max-width: 420px;
+}
+
+.tab {
+  flex: 1;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tab:hover {
+  color: var(--text-primary);
+}
+
+.tab--active {
+  color: var(--accent-x);
+  border-bottom-color: var(--accent-x);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--accent-x);
+  outline-offset: 2px;
+}
+
+.panel {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* PRD 화면 */
+.prd-view {
+  flex: 1;
+  width: 100%;
+  max-width: 680px;
+  max-height: min(75vh, 720px);
+  overflow: auto;
+  padding: 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.prd-content {
+  font-family: 'Consolas', 'Monaco', 'Ubuntu Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.container {
+  text-align: center;
+  max-width: 420px;
+}
+
+.container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-card);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.turn-indicator strong {
+  color: var(--accent-x);
+  transition: color 0.2s;
+}
+
+.turn-indicator strong.turn-o {
+  color: var(--accent-o);
+}
+
+.score-board {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.score-board span span {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 1.25rem;
+  padding: 12px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  aspect-ratio: 1;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cell {
+  font-family: inherit;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: var(--bg-dark);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  min-width: 0;
+}
+
+.cell:hover:not(:disabled) {
+  border-color: var(--accent-x);
+  background: rgba(59, 130, 246, 0.08);
+  transform: scale(1.02);
+}
+
+.cell:focus-visible {
+  outline: 2px solid var(--accent-x);
+  outline-offset: 2px;
+}
+
+.cell--x {
+  color: var(--accent-x);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.cell--o {
+  color: var(--accent-o);
+  border-color: rgba(244, 63, 94, 0.4);
+}
+
+.cell:disabled {
+  cursor: default;
+  opacity: 0.9;
+}
+
+.board--winner .cell:not(.cell--win) {
+  opacity: 0.5;
+}
+
+.cell--win {
+  animation: pulse 0.6s ease;
+  box-shadow: 0 0 20px var(--win-glow);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.message {
+  min-height: 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.message--x { color: var(--accent-x); }
+.message--o { color: var(--accent-o); }
+.message--draw { color: var(--text-muted); }
+
+.controls {
+  margin-top: 0.5rem;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  background: var(--accent-x);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 2px;
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+  .board {
+    max-width: 100%;
+  }
+  .cell {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>틱택토 Tic-Tac-Toe (Vanilla)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>틱택토</h1>
+    <p class="subtitle">Tic-Tac-Toe</p>
+    <div class="game-info">
+      <span class="turn-indicator">현재 차례: <strong id="current-player">X</strong></span>
+      <span class="score-board">
+        <span>X: <span id="score-x">0</span></span>
+        <span>O: <span id="score-o">0</span></span>
+        <span>무: <span id="score-draw">0</span></span>
+      </span>
+    </div>
+    <div class="board" id="board">
+      <button class="cell" data-index="0"></button>
+      <button class="cell" data-index="1"></button>
+      <button class="cell" data-index="2"></button>
+      <button class="cell" data-index="3"></button>
+      <button class="cell" data-index="4"></button>
+      <button class="cell" data-index="5"></button>
+      <button class="cell" data-index="6"></button>
+      <button class="cell" data-index="7"></button>
+      <button class="cell" data-index="8"></button>
+    </div>
+    <div class="message" id="message"></div>
+    <div class="controls">
+      <button class="btn" id="reset-btn">다시 하기</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
