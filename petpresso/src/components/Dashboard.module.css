@@ -1,0 +1,283 @@
+.page {
+  min-height: 100vh;
+  background: #f5f5f7;
+}
+
+.loading {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: #666;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #ff6b35;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.headerLeft {
+  flex: 1;
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1d1d1f;
+}
+
+.pageLabel {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.settingsBtn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #f5f5f7;
+  border-radius: 10px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.settingsBtn:hover {
+  background: #eee;
+  color: #1d1d1f;
+}
+
+.logoutBtn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 0.9rem;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.logoutBtn:hover {
+  border-color: #ff6b35;
+  color: #ff6b35;
+}
+
+/* Main */
+.main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.title {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  text-align: center;
+}
+
+.description {
+  margin: 0 0 2rem;
+  font-size: 0.95rem;
+  color: #666;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Status cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #eee;
+}
+
+.cardLeft,
+.cardRight {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cardRight {
+  justify-content: flex-end;
+}
+
+.cardIcon {
+  font-size: 1.25rem;
+}
+
+.cardValue {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1d1d1f;
+}
+
+.cardStatus {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* Timer */
+.timerSection {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #eee;
+}
+
+.timerText {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: #666;
+  text-align: center;
+}
+
+.timer {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.timerPart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timerNum {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.timerUnit {
+  font-size: 0.7rem;
+  color: #999;
+  margin-top: 0.15rem;
+}
+
+.timerColon {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin: 0 0.1rem 0 0;
+}
+
+/* Action buttons */
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.feedBtn,
+.cleanBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 1.25rem 1rem;
+  border-radius: 14px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feedBtn {
+  background: #ff6b35;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(255, 107, 53, 0.35);
+}
+
+.feedBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+.cleanBtn {
+  background: #fff;
+  color: #1d1d1f;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.cleanBtn:hover {
+  transform: translateY(-2px);
+  border-color: #ccc;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.actionIcon {
+  font-size: 1.5rem;
+}
+
+.actionHint {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.cleanBtn .actionHint {
+  color: #666;
+}
+
+@media (max-width: 480px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .timerNum {
+    font-size: 2rem;
+  }
+}
