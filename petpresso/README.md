@@ -53,7 +53,7 @@ git push -u origin main
 
 1. [Vercel](https://vercel.com)에 로그인 후 **Add New** → **Project** 선택
 2. GitHub 저장소를 연결하고 `petpresso` 프로젝트 선택
-3. **Framework Preset**: Vite 로 인식됩니다. **Root Directory**는 비워 두고 **Build Command**: `npm run build`, **Output Directory**: `dist` 확인
+3. **Framework Preset**: **Vite** 선택. **Root Directory**는 **반드시 비워 두기**(입력란에 아무 것도 넣지 않기). **Build Command**: `npm run build`, **Output Directory**: `dist`
 4. **Environment Variables**에 Firebase 관련 변수 추가:
    - `VITE_FIREBASE_API_KEY`
    - `VITE_FIREBASE_AUTH_DOMAIN`
@@ -64,6 +64,23 @@ git push -u origin main
 5. **Deploy** 클릭
 
 배포 후 Firebase Console의 **Authentication** → **Settings** → **Authorized domains**에 Vercel 도메인(예: `your-app.vercel.app`)을 추가해야 구글/이메일 로그인이 동작합니다.
+
+### 배포 에러: "Could not read package.json" / "ENOENT package.json"
+
+- **원인 1 – Root Directory 설정**  
+  Vercel **Settings** → **General** → **Root Directory**에 값이 있으면 지우고 비워 둡니다. (비어 있어야 저장소 루트에서 빌드합니다.)
+
+- **원인 2 – GitHub에 파일이 없음**  
+  아래처럼 `package.json`이 포함된 모든 파일을 커밋·푸시했는지 확인합니다.
+
+```bash
+git status
+git add .
+git commit -m "Ensure package.json and all files are committed"
+git push origin master
+```
+
+GitHub 저장소 페이지에서 **package.json**, **package-lock.json**, **src** 폴더가 보여야 합니다.
 
 ## 기술 스택
 

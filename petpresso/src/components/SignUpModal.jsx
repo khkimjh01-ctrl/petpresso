@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext'
 import styles from './SignUpModal.module.css'
 
 export default function SignUpModal({ onClose }) {
-  const { signUpWithEmail, signInWithEmail, signInWithGoogle } = useAuth()
+  const { signUpWithEmail, signInWithEmail, signInWithGoogle, isFirebaseEnabled } = useAuth()
   const [mode, setMode] = useState('signup') // 'signup' | 'signin'
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -11,6 +11,7 @@ export default function SignUpModal({ onClose }) {
   const [loading, setLoading] = useState(false)
 
   const isSignUp = mode === 'signup'
+  const firebaseReady = isFirebaseEnabled()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -76,6 +77,12 @@ export default function SignUpModal({ onClose }) {
             : '이메일과 비밀번호 또는 구글 계정으로 로그인하세요.'}
         </p>
 
+        {!firebaseReady && (
+          <p className={styles.warn}>
+            로그인 기능을 사용하려면 Vercel 환경 변수에 Firebase 설정을 추가한 뒤 재배포해 주세요. 지금은 대시보드를 둘러보실 수 있습니다.
+          </p>
+        )}
+
         <div className={styles.tabs}>
           <button
             type="button"
@@ -115,7 +122,7 @@ export default function SignUpModal({ onClose }) {
             disabled={loading}
           />
           {error && <p className={styles.error}>{error}</p>}
-          <button type="submit" className={styles.primaryBtn} disabled={loading}>
+          <button type="submit" className={styles.primaryBtn} disabled={loading || !firebaseReady}>
             {loading ? '처리 중...' : isSignUp ? '가입하기' : '로그인'}
           </button>
         </form>
@@ -128,7 +135,7 @@ export default function SignUpModal({ onClose }) {
           type="button"
           className={styles.googleBtn}
           onClick={handleGoogle}
-          disabled={loading}
+          disabled={loading || !firebaseReady}
         >
           <svg width="20" height="20" viewBox="0 0 24 24">
             <path

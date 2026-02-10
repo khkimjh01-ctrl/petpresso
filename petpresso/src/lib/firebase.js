@@ -10,6 +10,26 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID || '',
 }
 
-const app = initializeApp(firebaseConfig)
-export const auth = getAuth(app)
-export const googleProvider = new GoogleAuthProvider()
+// 빈 값·placeholder면 초기화하지 않음 (invalid-api-key 에러 방지)
+const hasConfig =
+  firebaseConfig.apiKey &&
+  firebaseConfig.projectId &&
+  firebaseConfig.apiKey.length > 20 &&
+  !/your-|xxx|example|replace/i.test(firebaseConfig.apiKey)
+
+let app = null
+let auth = null
+let googleProvider = null
+
+if (hasConfig) {
+  try {
+    app = initializeApp(firebaseConfig)
+    auth = getAuth(app)
+    googleProvider = new GoogleAuthProvider()
+  } catch (e) {
+    console.warn('Firebase init failed:', e)
+  }
+}
+
+export { auth, googleProvider }
+export const isFirebaseEnabled = () => !!auth
