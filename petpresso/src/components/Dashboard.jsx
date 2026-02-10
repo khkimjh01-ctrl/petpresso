@@ -139,6 +139,12 @@ export default function Dashboard() {
             <span className={styles.actionHint}>즉시 실행</span>
           </button>
         </section>
+
+        <section className={styles.footerCta}>
+          <button type="button" className={styles.preorderBtn}>
+            사전 예약하고 30% 할인받기
+          </button>
+        </section>
       </main>
     </div>
   )
